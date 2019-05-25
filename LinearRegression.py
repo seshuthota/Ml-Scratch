@@ -30,6 +30,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.model_selection import train_test_split
 import random
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
 
 random.seed(1)
 
@@ -115,12 +117,18 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, r
 
 def rSquare(X_train, X_test, y_train, y_test, algorithm):
     predicted = algorithm(X_train, y_train, X_test)
-    sumofsquares = sum((y_test - mean(y) ** 2))
-    sumofresiduals = sum((y_test - predicted) ** 2)
-    score = 1 - sumofresiduals / float(sumofsquares)
-    return score
+    y_mean_line = mean(y_test)
+    squared_error_regr = sum((predicted - y_test)**2)
+    squared_error_ymean = sum((y_test - y_mean_line)**2)
+    return 1 - squared_error_regr / squared_error_ymean
 
 
 rmse = evaluate_algorithm(X, y, simple_linear_regression, test_size)
-print("RMSE : %0.3f" % (rmse))
-print("Rsquare error : %0.3f " % (rSquare(X_train, X_test, y_train, y_test, simple_linear_regression)))
+print("RMSE from Math : %0.3f" % (rmse))
+print("Rsquare error from Math: %0.3f " % (rSquare(X_train, X_test, y_train, y_test, simple_linear_regression)))
+
+lr = LinearRegression()
+lr.fit(np.array(X_train).reshape(-1, 1), y_train)
+y_pred = lr.predict(np.array(X_test).reshape(-1, 1))
+print("RMSE from sklearn ", np.sqrt(mean_squared_error(y_test, y_pred)))
+print("Rsquare error : ",r2_score(y_test, y_pred))
