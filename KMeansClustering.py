@@ -6,14 +6,18 @@ random locations. Now we will find Euclidean distance between clusters and the d
 each data point based on the closest centroid.And now calculate the new centroids based on the classified points and
 iterate until we get to the point where the movement centroid from previous to the new is less than or equal to the
 tolerance.
-
-
+1. The problem with this algorithm is that with a bad initialization you can end up stuck in local optima.So you have to do couple
+    of restart or try different initializations to avoid this.
+2. And you have to decide number of the clusters before hand.
+3. Very easy to implement and is very fast with complexity of O(n^(k+2/p))
+4. For this algorithm it is hard to understand on exactly what basis the algorithms is actually classifying the
+    data.
 """
 
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib import style
 from sklearn.cluster import KMeans
-import numpy as np
 
 style.use('ggplot')
 
