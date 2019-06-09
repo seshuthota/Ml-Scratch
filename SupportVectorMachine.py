@@ -1,3 +1,33 @@
+"""
+Support vector machines is a classification problem with the objective to maximize the margin for decision boundary between
+positive and negative classes.
+
+This is a convex optimization probem.So one thing is certain here we will be confident that we can find the optimum point
+
+We can tune the hardness of margin by changing a 'C' parameter. In this way we can decide whether we want a fit that is decent enough
+to go with called as soft margin which converge faster or we can be very strict with the fit,  In this case convergence will take a
+lot of time and if we are too strict with out fit then it will overfit the training data so it is a trade off on how much good of a
+fit so that it can still generalize for the test data well.
+
+The Advantages :
+1. Their dependence on very few support vectors means it will take very small amount of memory.
+2. The prediction part of the algorithm is very fast as we just have to find the sign(wx+b) min case of binary
+    classification.
+3. Because they are affected only by the points near the margin we can say that this works well with
+    high-dimensional data even when the number of samples is less.
+4. Their integration with kernel methods make them
+    versatile to any type of data.
+The Disadvantages:
+1. The scaling of number of samples N is O[N^3] or O[N^2] for
+    efficient implementation.For large number of training samples this computational cost is very high.
+2. One need to do
+    a lot of cross validation to fine tune the 'C' :parameter . This can be very expensive if the dataset is big.
+3. There is no direct interpretation of the probability
+
+"""
+
+
+
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import style
